@@ -1,15 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Combobox } from "@headlessui/react";
 
 import { type NamedAPIResource } from 'pokenode-ts'
+import { usePokiStore } from "../state";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function PokemonPicker({ pokemon }: { pokemon: NamedAPIResource[] }) {
+export function PokemonPicker({ pokemon, index }: { pokemon: NamedAPIResource[], index: number }) {
   
   const [query, setQuery] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState<NamedAPIResource | null>(null);
@@ -19,12 +21,38 @@ export function PokemonPicker({ pokemon }: { pokemon: NamedAPIResource[] }) {
       ? pokemon
       : pokemon.filter((pokemon) => {
           return pokemon.name.toLowerCase().startsWith(query.toLowerCase());
-        });
+      });
+  
+  
+  const getPokemonId = (pokemon: NamedAPIResource) => { 
+
+    const id = pokemon.url.split('/').filter(v => v !== '').pop()
+
+    if(!id) throw new Error('No id found')
+
+    return parseInt(id)
+  }
+  
 
   return (
-    <Combobox as="div" value={selectedPokemon} onChange={setSelectedPokemon}>
+    <Combobox as="div" value={selectedPokemon} onChange={(pokemon) => {
+      
+      setSelectedPokemon(pokemon)
+
+      if(!pokemon) return
+
+      const id = getPokemonId(pokemon)
+
+      usePokiStore.getState().setPokemon(index, {
+        id: id,
+        name: pokemon.name,
+        sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id + 1}.png`
+      })
+    }}>
       <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">
-        Assigned to
+        {selectedPokemon && <div className="flex w-full justify-center">
+          <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.findIndex(v => v.name === selectedPokemon.name)+ 1}.png`} alt={selectedPokemon.name} />
+        </div>}
       </Combobox.Label>
       <div className="relative mt-2">
         <Combobox.Input

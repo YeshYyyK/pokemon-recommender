@@ -22,6 +22,7 @@ import { PokemonClient } from "pokenode-ts";
 import { useQuery } from "@tanstack/react-query";
 import { PokemonPicker } from "~/lib/Components/PokemonPicker";
 
+
 const Team = () => {
   const list = [1, 2, 3, 4, 5, 6];
 
@@ -39,13 +40,13 @@ const Team = () => {
         <div>Loading...</div>
       ) : (
         <>
-          {list.map((item) => {
+          {list.map((item, idx) => {
             return (
               <div
                 className="bg-indigo-500 p-4"
                 key={item}
               >
-                {data?.results && <PokemonPicker pokemon={data?.results}></PokemonPicker>}
+                {data?.results && <PokemonPicker index={idx} pokemon={data?.results}></PokemonPicker>}
               </div>
             );
           })}

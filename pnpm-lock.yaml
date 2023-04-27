@@ -22,6 +22,7 @@ specifiers:
   eslint: ^8.36.0
   eslint-config-next: ^13.2.4
   next: ^13.2.4
+  pokemon-sprites: github:PokeAPI/sprites
   pokenode-ts: ^1.18.3
   postcss: ^8.4.21
   prettier: ^2.8.6
@@ -32,6 +33,7 @@ specifiers:
   tailwindcss: ^3.3.0
   typescript: ^5.0.2
   zod: ^3.21.4
+  zustand: ^4.3.7
 
 dependencies:
   '@headlessui/react': 1.7.14_biqbaboplfbrettd7655fr4n2y
@@ -45,11 +47,13 @@ dependencies:
   axios: 1.3.6
   axios-cache-interceptor: 1.0.1_axios@1.3.6
   next: 13.3.1_biqbaboplfbrettd7655fr4n2y
+  pokemon-sprites: github.com/PokeAPI/sprites/fe9b71b303647573cd61f92d9a43fd32a47d9c7d
   pokenode-ts: 1.18.3_lggi4opt7eiojyjlpaanxctxqu
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   superjson: 1.12.2
   zod: 3.21.4
+  zustand: 4.3.7_react@18.2.0
 
 devDependencies:
   '@types/eslint': 8.37.0
@@ -2901,4 +2905,26 @@ packages:
 
   /zod/3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
+
+  /zustand/4.3.7_react@18.2.0:
+    resolution: {integrity: sha512-dY8ERwB9Nd21ellgkBZFhudER8KVlelZm8388B5nDAXhO/+FZDhYMuRnqDgu5SYyRgz/iaf8RKnbUs/cHfOGlQ==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  github.com/PokeAPI/sprites/fe9b71b303647573cd61f92d9a43fd32a47d9c7d:
+    resolution: {tarball: https://codeload.github.com/PokeAPI/sprites/tar.gz/fe9b71b303647573cd61f92d9a43fd32a47d9c7d}
+    name: pokemon-sprites
+    version: 1.0.0
     dev: false
